@@ -75,7 +75,7 @@
         var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
         
         // write your SQL as normal, then encode it
-        var query = "SELECT location FROM " + table + " LIMIT 100";
+        var query = "SELECT Location FROM " + table + " LIMIT 100";
         var queryurl = encodeURI(queryUrlHead + query + queryUrlTail);
         
         var jqxhr = $.get(queryurl, dataHandler, "jsonp");
