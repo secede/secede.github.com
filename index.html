@@ -54,6 +54,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
       var mymap;
+      var markersArray = [];
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(44, -74),
@@ -76,7 +77,7 @@
         var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
         
         // write your SQL as normal, then encode it
-        var query = "SELECT Location, Address, 'First Name', 'Last Name' FROM " + table + " LIMIT 100";
+        var query = "SELECT Location, Address, 'First Name', 'Last Name' FROM " + table + " LIMIT 10000";
         var queryurl = encodeURI(queryUrlHead + query + queryUrlTail);
         
         var jqxhr = $.get(queryurl, dataHandler, "jsonp");
@@ -84,7 +85,7 @@
       function dataHandler(d) {
         var data = d.table.rows;
         infoWindow = new google.maps.InfoWindow();
-        
+        clearOverlays();
         for (var i = 0; i < data.length; i++) {
           var latlonstr = data[i][0].split(",");
           var latlon = new google.maps.LatLng(latlonstr[0], latlonstr[1]);
@@ -98,9 +99,15 @@
 	    lastname: data[i][3],
             map: mymap
           });
+	  markersArray.push(marker);
           var fn = markerClick(mymap, marker, infoWindow);
           google.maps.event.addListener(marker, 'click', fn);
         }
+      }
+      function clearOverlays() {
+	for (var i = 0; i < markersArray.length; i++ ) {
+	  markersArray[i].setMap(null);
+	}
       }
       
       function markerClick(map, m, ifw) {
@@ -127,6 +134,10 @@
       function hideFrame() {
 	$("#submitframe").hide();
 	return true;
+	setTimeout(function() {
+	  getData("1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo");
+	}, 2000);
+
       }
       
       $(function() {
@@ -134,6 +145,7 @@
         getData("1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo");
         //$(window).resize(resize);
       });
+
   </script>
   <script type="text/javascript">
 
