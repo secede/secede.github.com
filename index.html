@@ -96,9 +96,25 @@
             rowid: i,
             map: mymap
           });
-          //var fn = markerClickFunction(mymap, marker, infoWindow);
-          google.maps.event.addListener(marker, 'click');
+          var fn = markerClickFunction(mymap, marker, infoWindow);
+          google.maps.event.addListener(marker, 'click', fn);
         }
+      }
+      
+      function markerClick(map, m, ifw) {
+          return function() {
+              // In case there's already an infoWindow open
+              ifw.close(map)
+              
+              // Build html content, using data stored in the marker instance
+              var infoHtml = '<strong>rowid: '+ m.rowid + ' prob: ' + m.prob
+              infoHtml += '</strong><br />' + m.position.toString() + "</p>";
+      
+              // Standard infoWindow initialization steps
+              infoWindow.setContent(infoHtml);
+              infoWindow.setPosition(m.position);
+              infoWindow.open(map);
+          };
       }
       
       function resize() {
