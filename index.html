@@ -68,7 +68,6 @@
         url = "https://spreadsheets.google.com/feeds/list/0AmAo3B4BtnzLdFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E/od6/public/values?alt=json-in-script&callback=cm_loadMapJSON";
       }
       
-      table = "1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo";
       function getData(table) {
         // Builds a Fusion Tables SQL query and hands the result to dataHandler()
         
@@ -82,6 +81,7 @@
         var jqxhr = $.get(queryurl, dataHandler, "jsonp");
       }
       function dataHandler(d) {
+        console.log("Hai we haz data");
         var data = d.table.rows;
         infoWindow = new google.maps.InfoWindow();
         
@@ -107,6 +107,7 @@
       
       $(function() {
         initialize();
+        getData("1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo");
         //$(window).resize(resize);
       });
   </script>
