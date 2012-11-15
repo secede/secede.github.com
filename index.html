@@ -8,9 +8,28 @@
     <meta name="author" content="">
 
     <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map_canvas { height: 100% }
+      html { 
+        height: 100% 
+      }
+      body { 
+        height: 100%; 
+        margin: 0; 
+        padding: 0 
+      }
+      #map_canvas { 
+        height: 100%;
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        top: 0;
+      }
+      #popup { 
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        width: 400px;
+        z-index: 3; 
+      }
 
     </style>
 
@@ -19,8 +38,9 @@
   <body>
 	<div id="map_canvas">
     </div>
-
-    <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E6MQ" width="760" height="677" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+	<div id="popup">
+      <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E6MQ" width="760" height="677" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF2wdyjrZmzMa0oLyAe1RLkbHqxjYk-0I&sensor=false">
     </script>
