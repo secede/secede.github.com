@@ -42,7 +42,7 @@
 
   <body>
 	<div id="map_canvas">
-      <iframe id="dermap" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=MAP&amp;q=select+col3+from+1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo&amp;h=false&amp;lat=39.003970126682376&amp;lng=-72.60989825000001&amp;z=4&amp;t=1&amp;l=col3&amp;y=-1&amp;tmplt=-1"></iframe>
+      <!--<iframe id="dermap" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=MAP&amp;q=select+col3+from+1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo&amp;h=false&amp;lat=39.003970126682376&amp;lng=-72.60989825000001&amp;z=4&amp;t=1&amp;l=col3&amp;y=-1&amp;tmplt=-1"></iframe>-->
     </div>
 	<div id="popup">
       <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E6MQ" width="360" height="460" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
@@ -53,30 +53,62 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
           
-          function initialize() {
-            var mapOptions = {
-              center: new google.maps.LatLng(-34.397, 150.644),
-              zoom: 8,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("map_canvas"),
-                mapOptions);
-          }
-
-    		
-          function gimmeMaps() {
-            url = "https://spreadsheets.google.com/feeds/list/0AmAo3B4BtnzLdFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E/od6/public/values?alt=json-in-script&callback=cm_loadMapJSON";
-          }
-      	  
-          function resize() {
-            //$("#dermap").attr('width', $(window).width());
-            //$("#dermap").attr('height', $(window).width());
-          }
-    
-          $(function() {
-            //initialize();
-            $(window).resize(resize);
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+                                      mapOptions);
+      }
+      
+      
+      function gimmeMaps() {
+        url = "https://spreadsheets.google.com/feeds/list/0AmAo3B4BtnzLdFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E/od6/public/values?alt=json-in-script&callback=cm_loadMapJSON";
+      }
+      
+      table = "1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo";
+      function getData(table) {
+        // Builds a Fusion Tables SQL query and hands the result to dataHandler()
+        
+        var queryUrlHead = 'http://www.google.com/fusiontables/api/query?sql=';
+        var queryUrlTail = '&jsonCallback=?'; // ? could be a function name
+        
+        // write your SQL as normal, then encode it
+        var query = "SELECT p201012, lat, lon FROM " + table + " LIMIT 100";
+        var queryurl = encodeURI(queryUrlHead + query + queryUrlTail);
+        
+        var jqxhr = $.get(queryurl, dataHandler, "jsonp");
+      }
+      function dataHandler(d) {
+        var data = d.table.rows;
+        infoWindow = new google.maps.InfoWindow();
+        
+        for (var i = 0; i < data.length; i++) {
+          var latlon = new google.maps.LatLng(data[i][1], data[i][2]);
+          var probability = data[i][0];
+          
+          var marker = new google.maps.Marker({
+            position: latlon,
+            rowid: i,
+            prob: probability,
+            map: mymap
           });
+          var fn = markerClickFunction(mymap, marker, infoWindow);
+          google.maps.event.addListener(marker, 'click', fn);
+        }
+      }
+      
+      function resize() {
+        //$("#dermap").attr('width', $(window).width());
+        //$("#dermap").attr('height', $(window).width());
+      }
+      
+      $(function() {
+        initialize();
+        //$(window).resize(resize);
+      });
   </script>
     
     
