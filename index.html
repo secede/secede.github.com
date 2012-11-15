@@ -31,10 +31,18 @@
         right: 50px;
         top: 50px;
         width: 260px;
-        height: 460px;
         z-index: 3; 
         overflow: hidden;
         background-color: rgba(255,255,255,0.3);
+      }
+      .header {
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+      }
+      .footer {
+	padding-left: 20px;
+	padding-right: 20px;
       }
 
     </style>
@@ -46,7 +54,14 @@
       <!--<iframe id="dermap" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=MAP&amp;q=select+col3+from+1y9tjWzivs5glTMoLFpxDz4ChnQjuW1UQSL6_NBo&amp;h=false&amp;lat=39.003970126682376&amp;lng=-72.60989825000001&amp;z=4&amp;t=1&amp;l=col3&amp;y=-1&amp;tmplt=-1"></iframe>-->
     </div>
 	<div id="popup">
+	  <div class="header">
+	    <h2>Secede Me</h2>
+	    Man up. Do it.
+	  </div>
       <iframe id="submitframe" src="form.html" width="260" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+	  <div class="footer">
+	    By submitting this form, you agree to seceed from the United States of America
+	  </div>
     </div>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF2wdyjrZmzMa0oLyAe1RLkbHqxjYk-0I&sensor=false">
