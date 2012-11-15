@@ -55,7 +55,7 @@
           
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(-44, 80),
+          center: new google.maps.LatLng(44, -80),
           zoom: 3,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -86,13 +86,12 @@
         infoWindow = new google.maps.InfoWindow();
         
         for (var i = 0; i < data.length; i++) {
-          var latlon = new google.maps.LatLng(data[i][1], data[i][2]);
-          var probability = data[i][0];
+          var latlon = new google.maps.LatLng(data[i][0]);
+          //var probability = data[i][0];
           
           var marker = new google.maps.Marker({
             position: latlon,
             rowid: i,
-            prob: probability,
             map: mymap
           });
           var fn = markerClickFunction(mymap, marker, infoWindow);
