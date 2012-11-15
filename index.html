@@ -63,13 +63,12 @@
           }
       	  
           function resize() {
-          	$("#dermap").width($(window).width());
-          	$("#dermap").width($(window).width());
+          	$("#dermap").attr('width', $(window).width());
+          	$("#dermap").attr('height', $(window).width());
           }
     
           $(function() {
             //initialize();
-            resize();
             $(window).resize(resize);
           });
   </script>
