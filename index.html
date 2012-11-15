@@ -86,9 +86,9 @@
         infoWindow = new google.maps.InfoWindow();
         
         for (var i = 0; i < data.length; i++) {
-          var latlonstr = data[i][0];
+          var latlonstr = data[i][0].split(",");
           console.log("Data at: "+latlonstr);
-          var latlon = new google.maps.LatLng(latlonstr);
+          var latlon = new google.maps.LatLng(latlonstr[0], latlonstr[1]);
           //var probability = data[i][0];
           
           var marker = new google.maps.Marker({
