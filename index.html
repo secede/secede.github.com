@@ -97,8 +97,8 @@
             rowid: i,
             map: mymap
           });
-          //var fn = markerClickFunction(mymap, marker, infoWindow);
-          //google.maps.event.addListener(marker, 'click', fn);
+          var fn = markerClick(mymap, marker, infoWindow);
+          google.maps.event.addListener(marker, 'click', fn);
         }
       }
       
