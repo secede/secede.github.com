@@ -52,14 +52,14 @@
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
-          
+      var mymap;
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(44, -80),
           zoom: 3,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        mymap = new google.maps.Map(document.getElementById("map_canvas"),
                                       mapOptions);
       }
       
