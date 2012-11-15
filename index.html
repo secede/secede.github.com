@@ -27,9 +27,14 @@
       var resize = function() {
         var height = $(window).height();
         var width = $(window).width();
-        var data = '<script src="https://docs.google.com/spreadsheet/gpub?url=http%3A%2F%2F9tm49u91btpu7le36r63p2sj07eqiv5p-ss-opensocial.googleusercontent.com%2Fgadgets%2Fifr%3Fup_title%3DSecede%26up_show_tooltip%3D1%26up_enable_wheel%3D0%26up_map_type%3Dnormal%26up__table_query_url%3Dhttps%253A%252F%252Fdocs.google.com%252Fspreadsheet%252Ftq%253Frange%253DD2%25253AD101%2526key%253D0AmAo3B4BtnzLdFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E%2526gid%253D0%2526pub%253D1%26url%3Dhttp%253A%252F%252Fwww.google.com%252Fig%252Fmodules%252Fmap.xml%26spreadsheets%3Dspreadsheets&height='+height+'&width='+width+'"></'+'script>';
+        var data = 'https://docs.google.com/spreadsheet/gpub?url=http%3A%2F%2F9tm49u91btpu7le36r63p2sj07eqiv5p-ss-opensocial.googleusercontent.com%2Fgadgets%2Fifr%3Fup_title%3DSecede%26up_show_tooltip%3D1%26up_enable_wheel%3D0%26up_map_type%3Dnormal%26up__table_query_url%3Dhttps%253A%252F%252Fdocs.google.com%252Fspreadsheet%252Ftq%253Frange%253DD2%25253AD101%2526key%253D0AmAo3B4BtnzLdFpmVENvZ3ZSd1hkUlJ1OGh2R0c2V0E%2526gid%253D0%2526pub%253D1%26url%3Dhttp%253A%252F%252Fwww.google.com%252Fig%252Fmodules%252Fmap.xml%26spreadsheets%3Dspreadsheets&height='+height+'&width='+width+'';
         console.log("New data: "+data);
-    	$("body").append(data);
+        
+        var script = document.createElement( 'script' );
+        script.type = 'text/javascript';
+        script.src = data;
+
+    	$("body").append(script);
     }
     
     $(function() {
